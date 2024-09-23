@@ -3,97 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Manager</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            width: 60%;
-            margin: 20px auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        h1 {
-            text-align: center;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background-color: #45a049;
-        }
-        .pet-list {
-            margin-top: 20px;
-        }
-        .pet-item {
-            background-color: #f9f9f9;
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Pet Database</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Pet Manager</h1>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-            <label for="name">Pet Name</label>
-            {{ form.name(size=32) }}
-            
-            <label for="age">Age</label>
-            {{ form.age(size=32) }}
-            
-            <label for="pet_type">Type</label>
-            {{ form.pet_type() }}
-            
-            <label for="breed">Breed (Optional)</label>
-            {{ form.breed(size=32) }}
-            
-            <button type="submit" class="btn">{{ form.submit() }}</button>
-        </form>
+    <h1>Pet Database</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name() }}<br>
+        {{ form.age.label }} {{ form.age() }}<br>
+        {{ form.type.label }} {{ form.type() }}<br>
+        {{ form.submit() }}
+    </form>
 
-        <h2>Current Pets</h2>
-        <div class="pet-list">
-            {% for pet in pets %}
-                <div class="pet-item">
-                    <strong>{{ pet.name }}</strong> ({{ pet.type }}, {{ pet.age }} years old)
-                    <br>
-                    {% if pet.breed %}
-                    Breed: {{ pet.breed }}
-                    {% else %}
-                    Breed: N/A
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+    <h2>Pet List</h2>
+    <ul>
+        {% for pet in pets %}
+            <li>{{ pet.name }} ({{ pet.age }} years old, {{ pet.type }})</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
